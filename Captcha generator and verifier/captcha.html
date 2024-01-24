@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <!-- Styling Section -->
+    <style>
+        body {
+            width: fit-content;
+            border: solid 1px black;
+            margin-left: 40%;
+            margin-top: 20%;
+        }
+
+        .captcha-container {
+            padding: 20px;
+            background-color: whitesmoke;
+            box-shadow: 5px 10px 10px;
+        }
+
+        header {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .captcha-text {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .refresh {
+            cursor: pointer;
+        }
+
+        #submit {
+            padding: 4px;
+        }
+
+        #btn {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+<body onload="generate()">
+
+    <!-- Captcha Container -->
+    <div class="captcha-container" id="user-input">
+        <header>Captcha</header>
+
+        <!-- Captcha Text Generation Place -->
+        <div class="captcha-text">
+            <!-- Refresh Icon -->
+            <div onclick="generate()" class="refresh">
+                <i class="fas fa-sync"></i>
+            </div>
+            <!-- Captcha Code -->
+            <div id="captcha"></div>
+        </div>
+
+        <!-- Captcha Typing Input Box -->
+        <input type="text" id="submit" placeholder="Enter Captcha">
+
+        <!-- Submit Button -->
+        <button id="btn">Verify</button>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        //Clearing old value in Input Box
+        document.getElementById("submit").value = ""
+
+        //Creating the generate funnction
+        function generate() {
+
+            //Selecting Captcha div and generating the code
+            var captchaText = document.getElementById("captcha")
+            var uniqueLetter = ""
+
+            //Assigning all Random letter to a variable
+            const randomLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
+            //Generating captcha text in 5 letters
+            for (i = 0; i < 5; i++) {
+                uniqueLetter += randomLetter.charAt(Math.random() * randomLetter.length)
+            }
+
+            //Storing genrated captcha
+            captchaText.innerHTML = uniqueLetter
+            //function to display result
+            var btn = document.getElementById("btn")
+            btn.addEventListener("click", function () {
+                const userInput = document.getElementById("submit").value
+                //Condition to verify the captcha is verified or failed
+                if (userInput == captchaText.innerHTML) {
+                    alert("Captcha is Verified Sucessfully")
+                    generate()
+                }
+                else {
+                    alert("Captcha Failed, Please try again")
+                }
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>

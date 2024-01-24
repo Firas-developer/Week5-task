@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        .image-container{
+            display: flex;
+            gap: 20px;
+        }
+        .popup{
+            position: absolute;
+            top: 0;
+            display: none;
+        }
+        .overlay{
+            background-color: black;
+            width: 1500px;
+            height: 720px;
+            opacity: 0.7;
+        }
+        .close{
+            position: absolute;
+            top: 1%;
+            right: 2%;
+            color: white;
+            cursor: pointer;
+        }
+        .popup-image{
+            display: flex;
+            gap: 20px;
+            position: absolute;
+            top: 15%;
+            left: 25%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Gallery</h1>
+    <div class="image-container">
+        <div id="img1">
+            <img src="https://fastly.picsum.photos/id/944/200/300.jpg?hmac=7n5IlapvjzzLSNeQqn4V2syM31KgmM1E9uyKQYNTz_g" alt="">
+        </div>
+        <div id="img2">
+            <img src="https://fastly.picsum.photos/id/971/200/300.jpg?hmac=13ePfSXGucrfsPCzPjUZtNe5jYo83FTet0dk-Lk2Q4E" alt="">
+        </div>
+        <div id="img3">
+            <img src="https://fastly.picsum.photos/id/236/200/300.jpg?hmac=k9j4rU4XMUV_jh877uh_7LxlkJ5B9vEl1fA6lj3ynuE" alt="">
+        </div>
+    </div>
+    <div class="popup" id="popup">
+        <div class="overlay"></div>
+        <div class="close" id="exit">
+            X
+        </div>
+        <div class="popup-image">
+            <div id="popupimg1">
+                <img src="https://fastly.picsum.photos/id/944/200/300.jpg?hmac=7n5IlapvjzzLSNeQqn4V2syM31KgmM1E9uyKQYNTz_g" alt="">
+            </div>
+            <div id="popupimg2">
+                <img src="https://fastly.picsum.photos/id/971/200/300.jpg?hmac=13ePfSXGucrfsPCzPjUZtNe5jYo83FTet0dk-Lk2Q4E" alt="">
+            </div>
+            <div id="popupimg3">
+                <img src="https://fastly.picsum.photos/id/236/200/300.jpg?hmac=k9j4rU4XMUV_jh877uh_7LxlkJ5B9vEl1fA6lj3ynuE" alt="">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var image1 = document.getElementById("img1")
+        var image2 = document.getElementById("img2")
+        var image3 = document.getElementById("img3")
+        var popup = document.getElementById("popup")
+        var close = document.getElementById("exit")
+        var popupimg1 = document.getElementById("popupimg1")
+        var popupimg2 = document.getElementById("popupimg2")
+        var popupimg3 = document.getElementById("popupimg3")
+
+        image1.addEventListener("click",function(){
+            popup.style.display = "block"
+            popupimg2.style.display = "none"
+            popupimg3.style.display = "none"
+        })
+        image2.addEventListener("click",function(){
+            popup.style.display = "block"
+            popupimg1.style.display = "none"
+            popupimg3.style.display = "none"
+            popupimg2.style.display = "block"
+        })
+        image3.addEventListener("click",function(){
+            popup.style.display = "block"
+            popupimg1.style.display = "none"
+            popupimg2.style.display = "none"
+            popupimg3.style.display = "block"
+        })
+        close.addEventListener("click",function(){
+            popup.style.display = "none"
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Quiz</title>
+    <style>
+        .quiz-result{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz" class="container pt-5">
+        <h1>Interactive Quiz</h1>
+        <br>
+        <div id="question1" class="question">
+            <p class="display-6">What is the capital of France?</p>
+            <label class="lead"><input class="m-2" type="radio" name="question0" value="option1">Paris</label><br>
+            <label class="lead"><input class="m-2" type="radio" name="question0" value="option2">Berlin</label><br>
+            <label class="lead"><input class="m-2" type="radio" name="question0" value="option3">Rome</label><br>
+        </div>
+        <div id="question2" class="question">
+            <p class="display-6">Which planet is known as red planet??</p>
+            <label class="lead"><input class="m-2" type="radio" name="question1" value="option1">Mars</label><br>
+            <label class="lead"><input class="m-2" type="radio" name="question1" value="option2">Venus</label><br>
+            <label class="lead"><input class="m-2" type="radio" name="question1" value="option3">Jupiter</label><br>
+        </div>
+        <div id="question3" class="question">
+            <p class="display-6">What is the largest mammel in the planet?</p>
+            <label class="lead"><input class="m-2" type="radio" name="question2" value="option1">Elephant</label><br>
+            <label class="lead"><input class="m-2" type="radio" name="question2" value="option2">Blue Whale</label><br>
+            <label class="lead"><input class="m-2" type="radio" name="question2" value="option3">Giraffee</label><br>
+        </div>
+        <button class="btn btn-primary mt-5" id="check-answers">Check Answers</button>
+        <div id="results" class="quiz-result" role="alert"></div>
+    </div>
+
+</body>
+
+<script>
+    const quiz = document.getElementById("quiz");
+    const resultsContainer = document.getElementById("results");
+    const submitButton = document.getElementById("check-answers");
+    resultsContainer.style.display = "none";
+
+    const questions = [{
+        question: "What is the capital of France?",
+        answers: {
+            option1: "Paris",
+            option2: "Berlin",
+            option3: "Rome"
+        },
+        correctAnswer: "option1"
+    }, {
+        question: "2.Which planet is known as red planet?",
+        answers: {
+            option1: "Mars",
+            option2: "Venus",
+            option3: "Jupiter"
+        },
+        correctAnswer: "option1"
+    }, {
+        question: "What is the largest mammel in the planet?",
+        answers: {
+            option1: "Elephant",
+            option2: "Blue Whale",
+            option3: "Giraffee"
+        },
+        correctAnswer: "option2"
+    }];
+
+    submitButton.addEventListener("click", showResults);
+
+    function showResults() {
+        let numCorrect = 0;
+
+        for (let i = 0; i < questions.length; i++) {
+            const question = questions[i];
+            const answerContainer = quiz.querySelector(`[name=question${i}]:checked`);
+            if (!answerContainer) {
+                alert("Please select an answer for all questions.");
+                return;
+            }
+            const answer = answerContainer.value;
+            if (answer === question.correctAnswer) {
+                numCorrect++;
+            }
+        }
+        resultsContainer.innerHTML = `<h1>Interactive Quiz</h1> <h2>Your Quiz Score</h2> <p>Score:${numCorrect}</p>`
+        resultsContainer.style.display = "block";
+    }
+</script>
+
+</html>
